@@ -23,9 +23,6 @@ export function TopBar({ health, healthError, dark, onToggleTheme }: Props) {
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <span className="text-lg font-bold tracking-tight whitespace-nowrap">Saaraansh</span>
-              <span className="brand-gradient rounded-md px-1.5 py-0.5 text-[10px] font-bold tracking-wide text-white dark:text-[#1a0f33]">
-                PRO
-              </span>
             </div>
             <p className="hidden truncate text-xs text-muted-foreground sm:block">
               Factuality-aware Hindi &amp; Hinglish summarization
@@ -44,9 +41,10 @@ export function TopBar({ health, healthError, dark, onToggleTheme }: Props) {
           <Button variant="outline" size="icon" onClick={onToggleTheme} aria-label="Toggle theme" className="rounded-xl">
             {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </Button>
-          {/* Visual only: there are no paid plans. */}
-          <Button className="brand-gradient rounded-xl border-0 px-4 font-semibold whitespace-nowrap text-white shadow-[0_0_24px_var(--glow)] hover:opacity-90 dark:text-[#1a0f33]">
-            Upgrade
+          <Button asChild className="brand-gradient rounded-xl border-0 px-4 font-semibold whitespace-nowrap text-white shadow-[0_0_24px_var(--glow)] hover:opacity-90 dark:text-[#1a0f33]">
+            <a href="https://github.com/Rajaryan1726/NLP_PROJECT" target="_blank" rel="noreferrer">
+              Source code
+            </a>
           </Button>
         </div>
       </div>
