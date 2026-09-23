@@ -1,0 +1,25 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+python-dotenv>=1.0
+pydantic>=2.7
+litellm>=1.50
+motor>=3.5
+qdrant-client>=1.11
+sentence-transformers>=3.0
+transformers>=4.44
+sentencepiece
+protobuf
+mem0ai>=0.1.100
+# Pinned: Windows Smart App Control blocks the DLLs of very new releases of these
+# (no reputation yet). These established versions load fine.
+scipy==1.15.3
+scikit-learn==1.6.1
+pandas==2.2.3
+jiter==0.10.0
+pytest>=8.0
+pytest-asyncio>=0.23
+# evaluation
+datasets>=2.20
+matplotlib>=3.9
+rouge-score>=0.1.2
+indic-transliteration>=2.3

@@ -1,0 +1,7 @@
+experiment,dataset,n,factuality_score,factuality_std,claim_score,entity_score,claims_total,pct_supported,pct_not_sure,pct_contradicted,pct_unsupported,fact_mismatch_rate,number_mismatch_rate,pct_summaries_with_mismatch,avg_summary_words,avg_source_words,compression_ratio,avg_inference_s,n_timed,avg_attempts,low_confidence_rate,rouge1,rouge2,rougeL
+standard,hindi,3,9.6467,0.256,0.941,1.0,32,0.9375,0.0,0.0625,0.0,0.0,0.0,0.0,107.0,549.3333,0.7694,27.7937,3,1,0,0.1082,0.0103,0.0837
+standard,code_mixed,3,9.5,0.408,0.9167,1.0,34,0.9118,0.0,0.0588,0.0294,0.0,0.0,0.0,109.6667,552.0,0.7699,26.174,3,1,0,0.1169,0.0056,0.088
+factuality_aware,hindi,3,9.18,0.586,0.8843,0.9683,25,0.88,0.04,0.04,0.04,0.0556,0.0,0.3333,82.0,549.3333,0.822,23.7537,3,1,0,0.1257,0.0066,0.0965
+factuality_aware,code_mixed,3,9.0,0.707,0.8333,1.0,26,0.8462,0.1154,0.0385,0.0,0.0,0.0,0.0,86.0,552.0,0.809,26.0377,3,1,0,0.1308,0.0111,0.0912
+factuality_aware_retry,hindi,3,8.7767,0.345,0.8075,0.9825,21,0.8095,0.0952,0.0476,0.0476,0.0303,0.0,0.3333,81.3333,549.3333,0.8251,21.2537,3,1,0,0.1329,0.0127,0.1035
+factuality_aware_retry,code_mixed,3,10.0,0.0,1.0,1.0,23,1.0,0.0,0.0,0.0,0.0,0.0,0.0,86.6667,552.0,0.8095,17.2227,3,1,0,0.1257,0.0118,0.1031
