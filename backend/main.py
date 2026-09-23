@@ -1,4 +1,6 @@
 """FastAPI app: routes only. The real work is in pipeline.py."""
+print("Saaraansh backend: loading libraries and models (30-60 s, the first run takes longer)...", flush=True)
+
 import asyncio
 import json
 import logging
