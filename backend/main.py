@@ -51,6 +51,7 @@ async def lifespan(app: FastAPI):
         await vector_store.ensure_collection()
     except Exception as e:
         log.error("database setup failed (is docker compose up?): %s", e)
+    log.info("READY: backend is up. Open http://localhost:5174")
     yield
 
 

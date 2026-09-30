@@ -1,0 +1,23 @@
+{
+  "name": "saaraansh",
+  "private": true,
+  "description": "Saaraansh (FactIndic): project-level commands. Run them from this folder.",
+  "scripts": {
+    "dev": "npm run db && concurrently --kill-others --names backend,frontend --prefix-colors magenta,cyan \"npm run backend\" \"npm run frontend\"",
+    "db": "docker compose up -d",
+    "db:stop": "docker compose stop",
+    "backend": "cd backend && cross-env HF_HUB_OFFLINE=1 .venv\\Scripts\\python -m uvicorn main:app --port 8000",
+    "frontend": "npm run dev --prefix frontend",
+    "setup": "npm run setup:backend && npm run setup:frontend && npm run setup:models",
+    "setup:backend": "cd backend && python -m venv .venv && .venv\\Scripts\\pip install torch --index-url https://download.pytorch.org/whl/cpu && .venv\\Scripts\\pip install -r requirements.txt",
+    "setup:frontend": "npm install --prefix frontend",
+    "setup:models": "cd backend && .venv\\Scripts\\python scripts\\download_models.py",
+    "test": "cd backend && .venv\\Scripts\\python -m pytest tests -q",
+    "eval": "cd backend && .venv\\Scripts\\python eval\\run_experiments.py && .venv\\Scripts\\python eval\\analyze.py",
+    "eval:smoke": "cd backend && .venv\\Scripts\\python eval\\run_experiments.py --limit 3"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0"
+  }
+}

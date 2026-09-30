@@ -1,0 +1,13 @@
+{
+  "name": "saaraansh-backend",
+  "private": true,
+  "description": "Shortcuts for the Python backend so it starts like the frontend: npm run dev",
+  "scripts": {
+    "dev": "docker compose -f ../docker-compose.yml up -d && set HF_HUB_OFFLINE=1&& .venv\\Scripts\\python -m uvicorn main:app --port 8000",
+    "test": ".venv\\Scripts\\python -m pytest tests -q",
+    "models": ".venv\\Scripts\\python scripts\\download_models.py",
+    "eval": ".venv\\Scripts\\python eval\\run_experiments.py && .venv\\Scripts\\python eval\\analyze.py",
+    "eval:smoke": ".venv\\Scripts\\python eval\\run_experiments.py --limit 3",
+    "test:summarizer": ".venv\\Scripts\\python scripts\\test_summarizer.py"
+  }
+}

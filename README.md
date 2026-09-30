@@ -14,31 +14,40 @@ corrective prompt. Corrections the user makes are remembered (Mem0) and used in 
 
 Requirements: Python 3.11+ (tested on 3.13), Node 20+, Docker Desktop.
 
+All commands run from the project folder (`C:\NLP PROJECT`), like any JS project:
+
 ```powershell
-# 1. databases (MongoDB + Qdrant), from the project folder
-cd "C:\NLP PROJECT"
-docker compose up -d
-
-# 2. backend
-cd backend
-python -m venv .venv
-.\.venv\Scripts\pip install torch --index-url https://download.pytorch.org/whl/cpu
-.\.venv\Scripts\pip install -r requirements.txt
-copy .env.example .env        # then put your OPENAI_API_KEY and MEM0_API_KEY in .env
-.\.venv\Scripts\python -m uvicorn main:app --port 8000
-
-# 3. frontend (second terminal)
-cd "C:\NLP PROJECT\frontend"
-npm install
-npm run dev                   # http://localhost:5174
+npm install                        # root tools (concurrently, cross-env)
+npm run setup                      # first time only: Python venv + packages, frontend packages, local models (~2 GB)
+copy backend\.env.example backend\.env   # then put your OPENAI_API_KEY and MEM0_API_KEY in backend\.env
+npm run dev                        # MongoDB + Qdrant, backend and frontend together -> http://localhost:5174
 ```
 
-The first backend start downloads the three local models (~2 GB) from HuggingFace. After that you can set
-`$env:HF_HUB_OFFLINE="1"` before starting uvicorn so startup doesn't make any network checks.
+`npm run dev` shows the backend (magenta) and frontend (cyan) logs in one terminal; Ctrl+C stops both.
+The backend needs 30-60 s to load its models; wait for the line `READY: backend is up`.
+
+**Or run them in two terminals** (each folder has its own `npm run dev`):
+
+```powershell
+cd "C:\NLP PROJECT\backend";  npm run dev     # terminal 1: databases + backend (port 8000)
+cd "C:\NLP PROJECT\frontend"; npm run dev     # terminal 2: frontend (port 5174)
+```
+
+Inside `backend` there are also `npm test`, `npm run models`, `npm run eval:smoke` and `npm run eval`.
+
+| Command | What it does |
+|---|---|
+| `npm run dev` | start the databases, backend (port 8000) and frontend (port 5174) |
+| `npm run backend` / `npm run frontend` | start only one of them |
+| `npm run db` / `npm run db:stop` | start / stop MongoDB + Qdrant (Docker) |
+| `npm run setup` | install everything (also `setup:backend`, `setup:frontend`, `setup:models`) |
+| `npm test` | backend tests (the Mem0 test needs internet + `MEM0_API_KEY`) |
+| `npm run eval:smoke` | evaluation on 3 articles per setting |
+| `npm run eval` | full evaluation + tables and charts (about 3 hours, uses the OpenAI key) |
+
+The backend starts with `HF_HUB_OFFLINE=1`, so the models must be downloaded once with `npm run setup:models`.
 
 Check everything is up: <http://localhost:8000/api/health> should report `"status": "ok"`.
-
-Tests: `cd backend; .\.venv\Scripts\python -m pytest tests -q` (the Mem0 test needs internet + `MEM0_API_KEY`).
 
 > **Ports.** Qdrant is mapped to host port **6335** and the frontend runs on **5174**, because 6333 and 5173
 > were already taken by other containers on the development machine. Change them in `docker-compose.yml`,
